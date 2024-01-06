@@ -123,6 +123,23 @@ app.get("/animals", async (req, res) => {
       res.status(400).send("error, read logs for details");
     }
   });
+
+//Show
+app.get("/animals/:id", async (req, res) => {
+  try{
+      // get the id from params
+      const id = req.params.id
+
+      // find the particular fruit from the database
+      const animal = await Animal.findById(id)
+
+      // render the template with the fruit
+      res.render("show.ejs", {animal})
+  }catch(error){
+      console.log("-----", error.message, "------")
+      res.status(400).send("error, read logs for details")
+  }
+})
 ///////////////////////////////////////////////////////
 // Server Listener
 ////////////////////////////////////////////////////////
