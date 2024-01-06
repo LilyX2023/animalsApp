@@ -129,6 +129,21 @@ app.get("/animals/new", (req, res) => {
   res.render("new.ejs")
 })
 
+// Create Route 
+app.post("/animals", async (req, res) => {
+  try {
+    // expression ? true : false (ternary operator)
+    req.body.extinct = req.body.extinct === "on" ? true : false;
+    // create the animal in the database
+    await Animal.create(req.body);
+    // redirect back to main page
+    res.redirect("/animals");
+  } catch (error) {
+    console.log("-----", error.message, "------");
+    res.status(400).send("error, read logs for details");
+  }
+});
+
 //Show
 app.get("/animals/:id", async (req, res) => {
   try{

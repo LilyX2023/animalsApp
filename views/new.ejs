@@ -2,10 +2,10 @@
 <html lang="en">
   <%- include("partials/head.ejs") %>
   <body>
-    <%- include("partials/header.ejs") %>
 
     <main>
       <div>
+        <a href="/animals"><button>Back to main page</button></a>
         <form action="/animals" method="post">
           <fieldset>
             <legend>Add an Animal</legend>
@@ -28,7 +28,7 @@
               placeholder="Life expectancy of the animal"
             /></label>
             <label
-              >Extinct or Not:<input 
+              >Extinct:<input 
               type="checkbox" 
               name="extinct"
             /></label>

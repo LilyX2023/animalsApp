@@ -10,7 +10,8 @@
           <h2>
             <%= animal.species %> - <%= animal.extinct ? "Extinct 🪦" : "Alive and Thriving 😎👌🔥" %>
           </h2>
-          <h3><%= animal.location %></h3>
+          <h3> Nature habitat: <%= animal.location %></h3>
+          <h3> Life expectancy: <%= animal.lifeExpectancy %></h3>
           <a href="/animals/<%= animal._id %>/edit"><button>Edit</button></a>
           <form action="/animals/<%= animal._id %>?_method=DELETE" method="POST">
             <button>Delete</button>
