@@ -117,7 +117,7 @@ app.get("/animals", async (req, res) => {
       //get all animals
       const animals = await Animal.find({});
       // render a template
-      res.render("views/index.ejs", {animals})
+      res.render("index.ejs", {animals})
     } catch (error) {
       console.log("-----", error.message, "------");
       res.status(400).send("error, read logs for details");
