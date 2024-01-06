@@ -144,6 +144,48 @@ app.post("/animals", async (req, res) => {
   }
 });
 
+// Edit Route 
+app.get("/animals/:id/edit", async (req, res) => {
+  try {
+    // get the id from params
+    const id = req.params.id;
+    // get the animal from the db
+    const animal = await Animal.findById(id);
+    //render the template
+    res.render("edit.ejs", { animal });
+  } catch (error) {
+    console.log("-----", error.message, "------");
+    res.status(400).send("error, read logs for details");
+  }
+});
+
+// The Update Route
+app.put("/animals/:id", async (req, res) => {
+  try {
+    // get the id
+    const id = req.params.id;
+    // update extinct or not in req.body
+    req.body.extinct = req.body.extinct === "on" ? true : false;
+    // update the animal in the database
+    await Animal.findByIdAndUpdate(id, req.body);
+    // res.redirect back to show page
+    res.redirect(`/animals/${id}`);
+  } catch (error) {
+    console.log("-----", error.message, "------");
+    res.status(400).send("error, read logs for details");
+  }
+});
+
+// The Delete Route
+app.delete("/animals/:id", async (req, res) => {
+  // get the id
+  const id = req.params.id
+  // delete the fruit
+  await Animal.findByIdAndDelete(id)
+  // redirect to main page
+  res.redirect("/animals")
+})
+
 //Show
 app.get("/animals/:id", async (req, res) => {
   try{
