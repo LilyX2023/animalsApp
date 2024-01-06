@@ -48,6 +48,61 @@ app.get('/',(req, res) => {
     res.send('Server is running')
 })
 
+app.get('/animals/seed', async (req, res) => {
+    try {
+    //array of animals
+    const startAnimals = [
+        {
+        species: "African Elephant",
+        extinct: false,
+        location: "Africa",
+        lifeExpectancy: 60
+      },
+      {
+        species: "Bengal Tiger",
+        extinct: false,
+        location: "India",
+        lifeExpectancy: 10
+      },
+      {
+        species: "Giant Panda",
+        extinct: false,
+        location: "China",
+        lifeExpectancy: 20
+      },
+      {
+        species: "Dodo",
+        extinct: true,
+        location: "Mauritius",
+        lifeExpectancy: 20
+      },
+      {
+        species: "Green Sea Turtle",
+        extinct: false,
+        location: "Global Oceans",
+        lifeExpectancy: 80
+      },
+      {
+        species: "Siberian Tiger",
+        extinct: false,
+        location: "Russia",
+        lifeExpectancy: 15
+      }]
+    
+    //Delete all fruits
+    await Animal.deleteMany({})
+
+    //Seed
+    const animals = await Animal.create(startAnimals)
+
+    //response
+    res.json(animals)
+    } catch (error) {
+        res.send('There was error, read logs for error details')
+    }
+
+})
+
 
 ///////////////////////////////////////////////////////
 // Server Listener
