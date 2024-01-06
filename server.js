@@ -124,6 +124,11 @@ app.get("/animals", async (req, res) => {
     }
   });
 
+//new
+app.get("/animals/new", (req, res) => {
+  res.render("new.ejs")
+})
+
 //Show
 app.get("/animals/:id", async (req, res) => {
   try{
