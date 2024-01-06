@@ -43,7 +43,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static("public"))
 
 ///////////////////////////////////////
-//Routes
+//Route
 app.get('/',(req, res) => {
     res.send('Server is running')
 })
@@ -53,36 +53,42 @@ app.get('/animals/seed', async (req, res) => {
     //array of animals
     const startAnimals = [
         {
+        id: 0,
         species: "African Elephant",
         extinct: false,
         location: "Africa",
         lifeExpectancy: 60
       },
       {
+        id: 1,
         species: "Bengal Tiger",
         extinct: false,
         location: "India",
         lifeExpectancy: 10
       },
       {
+        id: 2,
         species: "Giant Panda",
         extinct: false,
         location: "China",
         lifeExpectancy: 20
       },
       {
+        id: 3,
         species: "Dodo",
         extinct: true,
         location: "Mauritius",
         lifeExpectancy: 20
       },
       {
+        id: 4,
         species: "Green Sea Turtle",
         extinct: false,
         location: "Global Oceans",
         lifeExpectancy: 80
       },
       {
+        id: 5,
         species: "Siberian Tiger",
         extinct: false,
         location: "Russia",
@@ -98,12 +104,25 @@ app.get('/animals/seed', async (req, res) => {
     //response
     res.json(animals)
     } catch (error) {
-        res.send('There was error, read logs for error details')
+        res.send('There was error')
     }
 
 })
 
 
+///////////////////////////////////////////////////////
+//Index
+app.get("/animals", async (req, res) => {
+    try {
+      //get all animals
+      const animals = await Animal.find({});
+      // render a template
+      res.render("views/index.ejs", {animals})
+    } catch (error) {
+      console.log("-----", error.message, "------");
+      res.status(400).send("error, read logs for details");
+    }
+  });
 ///////////////////////////////////////////////////////
 // Server Listener
 ////////////////////////////////////////////////////////
